@@ -1,245 +1,34 @@
-<div align="center">
+# Aqua Sense Website
 
-# 🌊 AQUA SENSE
+React 19 single-page website for the Aqua Sense water quality monitoring prototype. Built with Vite 8, React Router, Tailwind CSS v4, GSAP/ScrollTrigger, Lenis, and Lucide icons.
 
-### Smart River Water Quality Monitoring System
+## Development
 
-**Monitor · Analyze · Protect**
-
-An IoT-based solution for monitoring river water quality through smart sensors and real-time data visualization.
-
-<br>
-
-![IoT](https://img.shields.io/badge/IoT-Smart_Monitoring-2E8B57?style=for-the-badge)
-![Arduino](https://img.shields.io/badge/Arduino-Uno-00979D?style=for-the-badge&logo=arduino&logoColor=white)
-![ESP8266](https://img.shields.io/badge/ESP8266-Wireless-orange?style=for-the-badge)
-![Python](https://img.shields.io/badge/Python-Flask-3776AB?style=for-the-badge&logo=python&logoColor=white)
-
-</div>
-
----
-
-## 🌍 Project Overview
-
-Aqua Sense is an **IoT-based river water quality monitoring system** designed to measure important water quality parameters and visualize sensor readings through a web dashboard.
-
-The system combines hardware sensors, wireless communication, and web technologies to support environmental monitoring and river conservation.
-
----
-
-## 🔬 What We Monitor
-
-<div align="center">
-
-| 🌡️ Temperature | 🌫️ Turbidity | 💧 TDS |
-|:---:|:---:|:---:|
-| DS18B20 | SEN0189 | TDS Sensor V1.0 |
-| Water temperature | Water cloudiness | Dissolved solids estimation |
-
-</div>
-
----
-
-## ⚙️ System Architecture
-
-<div align="center">
-
-```mermaid
-flowchart TD
-    A["🌊 River Water"] --> B["🔬 Sensors"]
-
-    B --> C["Arduino Uno"]
-
-    C --> D["ESP8266"]
-
-    D --> E["📡 Wi-Fi"]
-
-    E --> F["🐍 Flask API"]
-
-    F --> G["📊 Web Dashboard"]
-
-    G --> H["🌱 Environmental Insights"]
-
-    style A fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e
-    style B fill:#dcfce7,stroke:#16a34a,color:#14532d
-    style C fill:#fef3c7,stroke:#d97706,color:#78350f
-    style D fill:#fef3c7,stroke:#d97706,color:#78350f
-    style F fill:#f3e8ff,stroke:#9333ea,color:#581c87
-    style G fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e
+```sh
+npm install
+npm run dev
+npm run lint
+npm run build
 ```
 
-</div>
+`npm run preview` serves the production build locally. The Vercel rewrite in `vercel.json` routes SPA paths to `index.html`.
 
-### 🔄 Data Flow
+## Project structure
 
-<div align="center">
+- `src/main.jsx` mounts React and `BrowserRouter`.
+- `src/App.jsx` defines `/`, `/home`, `/problem`, `/solution`, and `/privacy`, applies route metadata, and initializes Lenis unless reduced motion is requested.
+- `src/pages/` contains route-level views.
+- `src/components/layout/` contains navigation and footer; `src/components/home/` contains the hero, carousel, problem and solution sections, and project details.
+- `src/components/common/` contains shared modals and the error boundary.
+- `src/data/content.js` stores major project claims, sensor details, chapter copy, carousel records, and route metadata. Some small interface labels remain in components.
+- `public/assets/` contains the logo, river art, news imagery, poster, and five solution videos. The Problem section background video is currently stored at the repository root as `problem video.mp4`.
 
-**Sensors → Arduino → ESP8266 → Wi-Fi → Flask Backend → Dashboard**
+## Data and backend
 
-</div>
+This repository is the website frontend only. It does not contain the Arduino/ESP8266 firmware, Flask backend, database, or a connected sensor API. The dashboard-style charts are illustrative; no live readings or verified field dataset are bundled. The intended hardware/data flow shown in the site must not be read as proof of an active integration.
 
----
+Sensor specifications in `src/data/content.js` refer to manufacturer documentation where available. Calibration results, sampling frequency, field location, team details, and project links remain explicit placeholders until confirmed.
 
-## 🧠 Technology Stack
+## Configuration and deployment
 
-<div align="center">
-
-| Layer | Technology |
-|:---:|:---|
-| 🔬 Sensing | DS18B20 · SEN0189 · TDS Sensor |
-| ⚡ Processing | Arduino Uno |
-| 📡 Communication | ESP8266 · Wi-Fi |
-| 🖥️ Backend | Python · Flask |
-| 📊 Frontend | HTML · CSS · JavaScript |
-
-</div>
-
----
-
-## ✨ Key Features
-
-<div align="center">
-
-| 🌡️ | 💧 | 📡 |
-|:---:|:---:|:---:|
-| Temperature Monitoring | TDS Measurement | Wireless Communication |
-
-| 🌫️ | 📈 | 🌍 |
-|:---:|:---:|:---:|
-| Turbidity Monitoring | Data Visualization | Environmental Monitoring |
-
-</div>
-
-- Real-time sensor data collection
-- Wireless transmission of measurements
-- Web-based water quality dashboard
-- Visual representation of water quality parameters
-- Backend API for sensor communication
-- Designed for river monitoring and environmental awareness
-
----
-
-## 🔌 Hardware Components
-
-<div align="center">
-
-| Component | Purpose |
-|:---|:---|
-| Arduino Uno | Sensor data acquisition |
-| ESP8266 | Wi-Fi communication |
-| DS18B20 | Temperature measurement |
-| SEN0189 | Turbidity measurement |
-| TDS Sensor V1.0 | TDS estimation |
-| Voltage Regulator | Power regulation |
-
-</div>
-
----
-
-## 📡 Backend API
-
-The Flask backend supports sensor communication through the following endpoints:
-
-<div align="center">
-
-| Method | Endpoint | Function |
-|:---:|:---:|:---|
-| `GET` | `/data` | Current sensor readings |
-| `GET` | `/history` | Historical measurements |
-| `POST` | `/data` | Submit sensor data |
-
-</div>
-
----
-
-## 🚀 How It Works
-
-<div align="center">
-
-```mermaid
-sequenceDiagram
-    participant S as Sensors
-    participant A as Arduino Uno
-    participant E as ESP8266
-    participant B as Flask Backend
-    participant D as Dashboard
-
-    S->>A: Collect measurements
-    A->>E: Send sensor values
-    E->>B: Transmit through Wi-Fi
-    B->>B: Process incoming data
-    B->>D: Provide readings
-    D->>D: Visualize water quality
-```
-
-</div>
-
----
-
-## 🌱 Applications
-
-<div align="center">
-
-| 🌊 | 🧪 | 🎓 |
-|:---:|:---:|:---:|
-| River Monitoring | Environmental Research | Educational Projects |
-
-| 🌍 | 📊 | 💧 |
-|:---:|:---:|:---:|
-| Water Conservation | Data Analysis | Water Quality Awareness |
-
-</div>
-
----
-
-## 🔮 Future Scope
-
-<div align="center">
-
-```mermaid
-mindmap
-  root((Aqua Sense))
-    Smart Monitoring
-      Sensor Integration
-      Continuous Data
-    Intelligent Analysis
-      AI Prediction
-      Anomaly Detection
-    Advanced Visualization
-      Geographic Mapping
-      Historical Trends
-    Environmental Impact
-      River Conservation
-      Pollution Awareness
-```
-
-</div>
-
-- 🗺️ Geographic water quality visualization
-- 🤖 AI-based water quality trend analysis
-- 📍 Pollution source mapping
-- ☁️ Cloud-based data storage
-- 🚨 Water quality anomaly alerts
-- 📱 Mobile-friendly monitoring interface
-
----
-
-## ⚠️ Important Note
-
-Aqua Sense is an evolving IoT prototype for environmental monitoring.
-
-The measured parameters alone cannot establish whether water is safe for drinking or identify specific pollutants.
-
-Reliable interpretation requires proper calibration, validation, and laboratory testing where necessary.
-
----
-
-<div align="center">
-
-## 🌊 Turning Water Data into Environmental Awareness
-
-### Built with 💚 for Cleaner Rivers
-
-**Aqua Sense**
-
-</div>
+Set `VITE_SITE_URL` to the canonical production origin when deploying (for example, the actual HTTPS site origin). Without it, route-specific titles and descriptions still update in the SPA, but canonical URLs and absolute social preview URLs are omitted. No analytics or secrets are configured. Review `vercel.json` when changing routes or adding external services; it contains the SPA rewrite and basic response security headers.
